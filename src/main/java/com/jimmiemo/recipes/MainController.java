@@ -1,4 +1,4 @@
-package com.example.accessingdatamysql;
+package com.jimmiemo.recipes;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,6 @@
-package com.example.accessingdatamysql;
+package com.jimmiemo.recipes;
 
 import org.springframework.data.repository.CrudRepository;
-
-import com.example.accessingdatamysql.Recipe;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
