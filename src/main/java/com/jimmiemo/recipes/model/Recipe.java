@@ -28,4 +28,8 @@ public class Recipe {
 	@JoinColumn(name="type",
 			referencedColumnName = "id")
 	private RecipeType recipeType;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="ethnicity",
+			referencedColumnName = "id")
+	private Ethnicity ethnicity;
 }
