@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Controller
-public class MainController {
+public class RecipeController {
 	@Autowired
 	private RecipeRepository recipeRepository;
 
@@ -32,5 +36,17 @@ public class MainController {
 	@GetMapping(path="/recipe")
 	public @ResponseBody Recipe getOne(@RequestParam int id) {
 		return recipeRepository.findById(id).orElse(null);
+	}
+
+	@GetMapping(path="/recipesWithIngredient")
+	public @ResponseBody Iterable<Recipe> getRecipesWithIngredients(@RequestParam Integer ingredientId) {
+		List<Recipe> allRecipes = (List<Recipe>) recipeRepository.findAll();
+		return allRecipes.stream().filter(recipe -> recipe.getIngredients().stream().anyMatch(ingredient -> ingredient.getId().equals(ingredientId))).collect(Collectors.toList());
+	}
+
+	@GetMapping(path="/recipesWithIngredients")
+	public @ResponseBody Iterable<Recipe> getRecipesWithIngredientss(@RequestParam List<Integer> ingredientIds) {
+		List<Recipe> allRecipes = (List<Recipe>) recipeRepository.findAll();
+		return allRecipes.stream().filter(recipe -> recipe.containsAll(ingredientIds)).collect(Collectors.toList());
 	}
 }

@@ -3,6 +3,7 @@ package com.jimmiemo.recipes.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +24,7 @@ public class Recipe {
 			joinColumns=@JoinColumn(name="recipe_id"),
 			inverseJoinColumns=@JoinColumn(name="ingredient_id")
 	)
-	private Set<Ingredient> ingredient;
+	private Set<Ingredient> ingredients;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="type",
 			referencedColumnName = "id")
@@ -32,4 +33,13 @@ public class Recipe {
 	@JoinColumn(name="ethnicity",
 			referencedColumnName = "id")
 	private Ethnicity ethnicity;
+
+	public boolean containsAll(List<Integer> ingredientIds) {
+		for (Integer ingredientId : ingredientIds) {
+			if (ingredients.stream().map(Ingredient::getId).noneMatch(id -> id.equals(ingredientId))) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
