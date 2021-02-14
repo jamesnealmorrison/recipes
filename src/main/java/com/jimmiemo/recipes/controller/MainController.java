@@ -17,10 +17,10 @@ public class MainController {
 	@PostMapping(path="/addRecipe")
 	public @ResponseBody String addRecipe(@RequestParam String name,
 										   @RequestParam String source) {
-		Recipe n = new Recipe();
-		n.setName(name);
-		n.setSource(source);
-		recipeRepository.save(n);
+		Recipe recipe = new Recipe();
+		recipe.setName(name);
+		recipe.setSource(source);
+		recipeRepository.save(recipe);
 		return "Saved";
 	}
 

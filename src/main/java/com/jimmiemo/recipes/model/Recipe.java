@@ -24,4 +24,8 @@ public class Recipe {
 			inverseJoinColumns=@JoinColumn(name="ingredient_id")
 	)
 	private Set<Ingredient> ingredient;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="type",
+			referencedColumnName = "id")
+	private RecipeType recipeType;
 }
