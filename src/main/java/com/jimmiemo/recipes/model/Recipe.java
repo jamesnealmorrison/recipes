@@ -2,10 +2,8 @@ package com.jimmiemo.recipes.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,4 +18,10 @@ public class Recipe {
 	private Integer tracyRanking;
 	private String page;
 	private String notes;
+	@OneToMany
+	@JoinTable(name="recipe_ingredients",
+			joinColumns=@JoinColumn(name="recipe_id"),
+			inverseJoinColumns=@JoinColumn(name="ingredient_id")
+	)
+	private Set<Ingredient> ingredient;
 }
